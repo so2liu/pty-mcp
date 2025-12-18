@@ -37,7 +37,7 @@ This MCP server allows **Claude Code to control Claude Code itself**, vim, top, 
 ### Claude Code
 
 ```bash
-claude mcp add pty-debug -- npx -y pty-mcp-server@latest
+claude mcp add pty-debug -- npx -y @so2liu/pty-mcp-server@latest
 ```
 
 ### Claude Desktop
@@ -49,7 +49,7 @@ Add to `claude_desktop_config.json`:
   "mcpServers": {
     "pty-debug": {
       "command": "npx",
-      "args": ["-y", "pty-mcp-server@latest"]
+      "args": ["-y", "@so2liu/pty-mcp-server@latest"]
     }
   }
 }
@@ -64,7 +64,7 @@ Add to VS Code settings or `.vscode/mcp.json`:
   "mcpServers": {
     "pty-debug": {
       "command": "npx",
-      "args": ["-y", "pty-mcp-server@latest"]
+      "args": ["-y", "@so2liu/pty-mcp-server@latest"]
     }
   }
 }
@@ -79,7 +79,7 @@ Add to `~/.cursor/mcp.json`:
   "mcpServers": {
     "pty-debug": {
       "command": "npx",
-      "args": ["-y", "pty-mcp-server@latest"]
+      "args": ["-y", "@so2liu/pty-mcp-server@latest"]
     }
   }
 }
@@ -94,7 +94,7 @@ Add to Cline MCP settings:
   "mcpServers": {
     "pty-debug": {
       "command": "npx",
-      "args": ["-y", "pty-mcp-server@latest"]
+      "args": ["-y", "@so2liu/pty-mcp-server@latest"]
     }
   }
 }
@@ -103,13 +103,13 @@ Add to Cline MCP settings:
 ### Gemini CLI
 
 ```bash
-gemini mcp add pty-debug -- npx -y pty-mcp-server@latest
+gemini mcp add pty-debug -- npx -y @so2liu/pty-mcp-server@latest
 ```
 
 ### Codex CLI
 
 ```bash
-codex mcp add pty-debug -- npx -y pty-mcp-server@latest
+codex mcp add pty-debug -- npx -y @so2liu/pty-mcp-server@latest
 ```
 
 ## MCP Tools
@@ -177,7 +177,7 @@ Releases are automatically published to npm via GitHub Actions.
 
 1. Create npm granular token at https://www.npmjs.com/settings/tokens/granular-access-tokens/new
    - Expiration: 90 days
-   - Packages: `pty-mcp-server`
+   - Packages: `@so2liu/pty-mcp-server`
    - Permissions: Read and write
 
 2. Add `NPM_TOKEN` secret at https://github.com/so2liu/pty-mcp/settings/secrets/actions
