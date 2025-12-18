@@ -169,6 +169,17 @@ bun run lint
 - @xterm/headless (terminal emulation)
 - @modelcontextprotocol/sdk (MCP server)
 
+## Publishing
+
+Releases are automatically published to npm via GitHub Actions.
+
+To release a new version:
+1. Update version in `package.json`
+2. Create a GitHub release with the version tag (e.g., `v1.0.1`)
+3. The workflow will automatically publish to npm
+
+Setup requires `NPM_TOKEN` secret in GitHub repository settings.
+
 ## License
 
 MIT
