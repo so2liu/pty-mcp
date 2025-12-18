@@ -1,11 +1,41 @@
 {
   "name": "pty-mcp-server",
   "version": "1.0.0",
-  "description": "MCP server for debugging PTY/TTY/TUI programs",
+  "description": "MCP server for debugging PTY/TTY/TUI programs. Enables Claude Code to control Claude Code, vim, and other TUI apps.",
   "type": "module",
   "main": "dist/index.js",
+  "bin": {
+    "pty-mcp-server": "dist/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "keywords": [
+    "mcp",
+    "pty",
+    "tty",
+    "tui",
+    "terminal",
+    "claude",
+    "claude-code",
+    "vim",
+    "debug",
+    "anthropic"
+  ],
+  "author": "so2liu",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/so2liu/pty-mcp.git"
+  },
+  "homepage": "https://github.com/so2liu/pty-mcp#readme",
+  "bugs": {
+    "url": "https://github.com/so2liu/pty-mcp/issues"
+  },
   "scripts": {
     "build": "tsc",
+    "prepublishOnly": "npm run build",
     "start": "node dist/index.js",
     "dev": "tsx src/index.ts",
     "lint": "eslint src"
