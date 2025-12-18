@@ -34,24 +34,82 @@ This MCP server allows **Claude Code to control Claude Code itself**, vim, top, 
 
 ## Installation
 
+### Claude Code
+
 ```bash
-bun install
-bun run build
+claude mcp add pty-debug -- npx -y pty-mcp-server@latest
 ```
 
-## Configuration
+### Claude Desktop
 
-Add to `~/.claude/settings.json`:
+Add to `claude_desktop_config.json`:
 
 ```json
 {
   "mcpServers": {
     "pty-debug": {
-      "command": "node",
-      "args": ["/path/to/pyt-mcp/dist/index.js"]
+      "command": "npx",
+      "args": ["-y", "pty-mcp-server@latest"]
     }
   }
 }
+```
+
+### VS Code / Copilot
+
+Add to VS Code settings or `.vscode/mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "pty-debug": {
+      "command": "npx",
+      "args": ["-y", "pty-mcp-server@latest"]
+    }
+  }
+}
+```
+
+### Cursor
+
+Add to `~/.cursor/mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "pty-debug": {
+      "command": "npx",
+      "args": ["-y", "pty-mcp-server@latest"]
+    }
+  }
+}
+```
+
+### Cline
+
+Add to Cline MCP settings:
+
+```json
+{
+  "mcpServers": {
+    "pty-debug": {
+      "command": "npx",
+      "args": ["-y", "pty-mcp-server@latest"]
+    }
+  }
+}
+```
+
+### Gemini CLI
+
+```bash
+gemini mcp add pty-debug -- npx -y pty-mcp-server@latest
+```
+
+### Codex CLI
+
+```bash
+codex mcp add pty-debug -- npx -y pty-mcp-server@latest
 ```
 
 ## MCP Tools
@@ -87,6 +145,22 @@ Supports all common shortcuts:
 -------------------------------------------------------------------------------------
 ```
 
+## Development
+
+```bash
+# Install dependencies
+bun install
+
+# Development mode
+bun run dev
+
+# Build
+bun run build
+
+# Lint
+bun run lint
+```
+
 ## Tech Stack
 
 - Node.js (runtime)
@@ -94,3 +168,7 @@ Supports all common shortcuts:
 - node-pty (PTY spawning)
 - @xterm/headless (terminal emulation)
 - @modelcontextprotocol/sdk (MCP server)
+
+## License
+
+MIT
