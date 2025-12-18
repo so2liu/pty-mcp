@@ -173,12 +173,22 @@ bun run lint
 
 Releases are automatically published to npm via GitHub Actions.
 
-To release a new version:
-1. Update version in `package.json`
-2. Create a GitHub release with the version tag (e.g., `v1.0.1`)
-3. The workflow will automatically publish to npm
+### Setup (one-time)
 
-Setup requires `NPM_TOKEN` secret in GitHub repository settings.
+1. Create npm granular token at https://www.npmjs.com/settings/tokens/granular-access-tokens/new
+   - Expiration: 90 days
+   - Packages: `pty-mcp-server`
+   - Permissions: Read and write
+
+2. Add `NPM_TOKEN` secret at https://github.com/so2liu/pty-mcp/settings/secrets/actions
+
+3. Set calendar reminder to rotate token every 90 days
+
+### Release new version
+
+1. Update version in `package.json`
+2. Create a GitHub release with tag (e.g., `v1.0.1`)
+3. GitHub Actions will automatically publish to npm
 
 ## License
 
