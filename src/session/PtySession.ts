@@ -53,6 +53,35 @@ export class PtySession {
       this.terminal.write(data);
     });
 
+    // Pipe terminal responses (like DSR/CPR) back to PTY
+    // This is needed for applications that query cursor position
+    this.terminal.onData((data: string) => {
+      if (this._isAlive) {
+        this.ptyProcess.write(data);
+      }
+    });
+
+    // Handle DSR (Device Status Report) queries manually
+    // xterm-headless doesn't automatically generate CPR responses
+    // DSR Ps=6 requests cursor position report (CPR)
+    this.terminal.parser.registerCsiHandler({ final: 'n' }, (params) => {
+      const ps = params[0];
+      if (ps === 6 && this._isAlive) {
+        // CPR response format: CSI row ; col R (1-indexed)
+        const buffer = this.terminal.buffer.active;
+        const row = buffer.cursorY + 1; // Convert to 1-indexed
+        const col = buffer.cursorX + 1; // Convert to 1-indexed
+        this.ptyProcess.write(`\x1b[${row};${col}R`);
+        return true; // Handled
+      }
+      if (ps === 5 && this._isAlive) {
+        // DSR status report - respond with "OK"
+        this.ptyProcess.write('\x1b[0n');
+        return true;
+      }
+      return false; // Not handled
+    });
+
     // Handle process exit
     this.ptyProcess.onExit(({ exitCode, signal }) => {
       this.exitCode = exitCode;
