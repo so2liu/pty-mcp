@@ -18,7 +18,7 @@ jobs:
           node-version: '22'
 
       - name: Upgrade npm for OIDC support
-        run: npm install -g npm@latest
+        run: npm install -g npm@latest && npm --version
 
       - name: Install dependencies
         run: npm install
@@ -26,5 +26,8 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Publish to npm with provenance
-        run: npm publish --access public --provenance
+      - name: Publish to npm
+        run: |
+          echo "NPM version: $(npm --version)"
+          echo "ACTIONS_ID_TOKEN_REQUEST_URL is set: ${ACTIONS_ID_TOKEN_REQUEST_URL:+yes}"
+          npm publish --access public
