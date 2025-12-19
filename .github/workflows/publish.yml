@@ -4,30 +4,21 @@ on:
   release:
     types: [published]
 
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
   publish:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      id-token: write
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '24'
+          registry-url: 'https://registry.npmjs.org'
 
-      - name: Upgrade npm for OIDC support
-        run: npm install -g npm@latest && npm --version
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build
-        run: npm run build
-
-      - name: Publish to npm
-        run: |
-          echo "NPM version: $(npm --version)"
-          echo "ACTIONS_ID_TOKEN_REQUEST_URL is set: ${ACTIONS_ID_TOKEN_REQUEST_URL:+yes}"
-          npm publish --access public
+      - run: npm ci
+      - run: npm run build
+      - run: npm publish --access public
