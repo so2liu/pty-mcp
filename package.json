@@ -1,6 +1,6 @@
 {
   "name": "@so2liu/pty-mcp-server",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "MCP server for debugging PTY/TTY/TUI programs. Enables Claude Code to control Claude Code, vim, and other TUI apps.",
   "type": "module",
   "main": "dist/index.js",
